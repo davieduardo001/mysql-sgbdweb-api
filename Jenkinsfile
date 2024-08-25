@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'homol', url: 'https://github.com/your-repo.git'
+                git branch: 'homol', url: 'https://github.com/davieduardo001/mysql-sgbdweb-api.git'
             }
         }
 
