@@ -18,7 +18,7 @@ jobs:
       uses: docker/setup-buildx-action@v2
 
     - name: Build Docker image
-      run: docker build -t myapp:latest -f ./app/Dockerfile ./app
+      run: docker build -t mysql-webapp-api:latest -f ./app/Dockerfile ./app
 
     - name: Set up SSH key
       run: |
@@ -35,7 +35,7 @@ jobs:
         ssh -o StrictHostKeyChecking=no root@192.168.0.10 << 'EOF'
           docker stop mysql-webapp-api || true
           docker rm mysql-webapp-api || true
-          docker run -d -p 8000:8000 --name mysql-webapp-api myapp:latest
+          docker run -d -p 8001:8000 --name mysql-webapp-api mysql-webapp-api:latest
         EOF
       env:
         HOME_LAB_SSH_KEY: ${{ secrets.HOME_LAB_SSH_KEY }}
