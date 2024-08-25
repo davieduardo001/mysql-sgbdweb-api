@@ -1,0 +1,19 @@
+services:
+  web:
+    build:
+      context: ~/Projects/mysql-webapp-api/app   # The path to your Dockerfile
+    ports:
+      - "8000:8000"    # Map host port 8000 to container port 8000
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+    env_file:
+      - .env
+    networks:
+      - my-network  # Specify the network to use
+
+networks:
+  my-network:
+    external: true  # Indicate this network already exists
