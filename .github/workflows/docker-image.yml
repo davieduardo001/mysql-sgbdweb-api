@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - homol
+  workflow_dispatch:  
 
 jobs:
   build-and-deploy:
@@ -36,5 +37,3 @@ jobs:
           docker rm mysql-webapp-api || true
           docker run -d -p 8000:8000 --name myapp ghcr.io/${{ github.repository }}/mysql-webapp-api:latest
         EOF
-
-      
