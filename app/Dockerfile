@@ -5,7 +5,6 @@ FROM python:3.9-slim
 ENV FLASK_APP=app
 ENV FLASK_RUN_HOST=0.0.0.0
 
-# Set the working directory
 WORKDIR /app
 
 # Copy the application code to the container
