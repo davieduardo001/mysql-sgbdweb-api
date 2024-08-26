@@ -8,18 +8,10 @@ pipeline {
             }
         }
 
-        stage('Build Docker Images') {
-            steps {
-                script {
-                    sh 'docker-compose build'
-                }
-            }
-        }
-
         stage('Deploy') {
             steps {
                 script {
-                    sh 'docker-compose up -d'
+                    sh '/usr/bin/docker-compose up --build'
                 }
             }
         }
