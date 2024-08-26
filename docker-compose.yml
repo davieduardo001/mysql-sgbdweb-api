@@ -12,8 +12,8 @@ services:
     env_file:
       - .env
     networks:
-      - my-network  # Specify the network to use
+      - mysql-sgbdweb-network  # Specify the network to use
 
 networks:
-  my-network:
-    driver: bridge  # Indicate this network already exists
+  my-shared-network:
+    external: true # Indicate this network already exists
