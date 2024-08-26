@@ -1,9 +1,9 @@
 services:
-  web:
+  backend:
     build:
-      context: ./app   # The path to your Dockerfile
+      context: ./backend   # The path to your backend Dockerfile
     ports:
-      - "8000:8000"    # Map host port 8000 to container port 8000
+      - "8001:8000"        # Map host port 8000 to container port 8000 for backend
     environment:
       - DB_HOST=${DB_HOST}
       - DB_USER=${DB_USER}
@@ -12,8 +12,18 @@ services:
     env_file:
       - .env
     networks:
-      - mysql-sgbdweb-network  # Specify the network to use
+      - my-shared-network
+
+  frontend:
+    build:
+      context: ./frontend  # The path to your frontend Dockerfile (React app)
+    ports:
+      - "8002:3000"        # Map host port 3000 to container port 3000 for frontend
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:8000  # Set backend URL for React app
+    networks:
+      - my-shared-network
 
 networks:
   my-shared-network:
-    external: true # Indicate this network already exists
+    driver: bridge
